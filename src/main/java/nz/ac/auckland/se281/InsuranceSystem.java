@@ -1,18 +1,59 @@
 package nz.ac.auckland.se281;
 
+// import java.util.ArrayList;
 import nz.ac.auckland.se281.Main.PolicyType;
 
 public class InsuranceSystem {
+
+  private ArrayList<User> userList = new ArrayList<>();
+
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
   }
 
   public void printDatabase() {
-    // TODO: Complete this method.
+    // if (ArrayList.isEmpty()) {
+    //   System.out.println("Database has 0 profiles.");
+    //   break;
+    // } else if (ArrayList.size() == 1) {
+    //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1", "", ":");
+    // } else {
+    //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage(userList.size(), "s", ":");
+    // }
+
+    // for (int i = 0; i < userList.size(); i++) {
+    //   User someUserInstance = userList.get(i);
+    //   System.out.print((i + 1) + ": ");
+    //   someUserInstance.printdetails();
+    // }
   }
 
   public void createNewProfile(String userName, String age) {
-    // TODO: Complete this method.
+    // String userNameSplit = userName.split(" ");
+    // System.out.println(age);
+
+    // make sure username is 3 letters or more
+    if (userName.length() < 3) {
+      MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
+    }
+
+    // ensure that name is in title case
+    String firstLetter = userName.substring(0, 1).toUpperCase();
+    String allLettersButFirst = userName.substring(1).toLowerCase();
+    userName = firstLetter + allLettersButFirst;
+    // System.out.println(userName);
+
+    // ensure that the inputted username is not a duplicate
+    // if (userName)
+
+    // age string to int
+    int ageOfClient = Integer.parseInt(age);
+    // System.out.println(ageOfProfile);
+
+    // if (userList.contains(userName)) {}
+
+    // add to arraylist
+    // userList.add();
   }
 
   public void loadProfile(String userName) {
