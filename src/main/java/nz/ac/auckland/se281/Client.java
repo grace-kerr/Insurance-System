@@ -14,4 +14,12 @@ public class Client {
   public void printDetails() {
     System.out.println(userName + ", " + age);
   }
+
+  public String getUserName() {
+    return this.userName;
+  }
+
+  public String getAge() {
+    return this.age;
+  }
 }
