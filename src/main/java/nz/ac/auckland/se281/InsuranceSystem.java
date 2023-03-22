@@ -12,26 +12,28 @@ public class InsuranceSystem {
   }
 
   public void printDatabase() {
-    // if (clientList.isEmpty()) {
-    //   System.out.println("Database has 0 profiles.");
-    //   break;
-    // } else if (clientList.size() == 1) {
-    //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1", "", ":");
-    // } else {
-    //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage(userList.size(), "s", ":");
-    // }
+    if (clientList.isEmpty()) {
+      System.out.println("Database has 0 profiles.");
+      return;
+    } else if (clientList.size() == 1) {
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1", "", ":");
+    } else {
+      String sizeOfClientListAsAString = Integer.toString(clientList.size());
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage(sizeOfClientListAsAString, "s", ":");
+    }
 
-    // for (int i = 0; i < userList.size(); i++) {
-    //   User someUserInstance = userList.get(i);
-    //   System.out.print((i + 1) + ": ");
-    //   someUserInstance.printdetails();
-    // }
+    for (int i = 0; i < clientList.size(); i++) {
+      Client someClientInstance = clientList.get(i);
+      System.out.print(" " + (i + 1) + ": ");
+      someClientInstance.printDetails();
+    }
   }
 
   public void createNewProfile(String userName, String age) {
     // make sure username is 3 letters or more
     if (userName.length() < 3) {
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
+      return;
     }
 
     // ensure that name is in title case
@@ -62,7 +64,6 @@ public class InsuranceSystem {
     //   System.out.println("print done");
     // }
 
-    // userList.add();
     MessageCli.PROFILE_CREATED.printMessage(userName, age);
   }
 
