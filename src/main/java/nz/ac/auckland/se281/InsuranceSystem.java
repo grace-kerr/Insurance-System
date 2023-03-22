@@ -1,21 +1,21 @@
 package nz.ac.auckland.se281;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 import nz.ac.auckland.se281.Main.PolicyType;
 
 public class InsuranceSystem {
 
-  private ArrayList<User> userList = new ArrayList<>();
+  private ArrayList<Client> clientList = new ArrayList<>();
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
   }
 
   public void printDatabase() {
-    // if (ArrayList.isEmpty()) {
+    // if (clientList.isEmpty()) {
     //   System.out.println("Database has 0 profiles.");
     //   break;
-    // } else if (ArrayList.size() == 1) {
+    // } else if (clientList.size() == 1) {
     //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1", "", ":");
     // } else {
     //   MessageCli.PRINT_DB_POLICY_COUNT.printMessage(userList.size(), "s", ":");
@@ -29,9 +29,6 @@ public class InsuranceSystem {
   }
 
   public void createNewProfile(String userName, String age) {
-    // String userNameSplit = userName.split(" ");
-    // System.out.println(age);
-
     // make sure username is 3 letters or more
     if (userName.length() < 3) {
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
@@ -48,12 +45,25 @@ public class InsuranceSystem {
 
     // age string to int
     int ageOfClient = Integer.parseInt(age);
-    // System.out.println(ageOfProfile);
+    // System.out.println(ageOfClient);
+    if (ageOfClient < 0) {
+      MessageCli.INVALID_AGE.printMessage(age, userName);
+      return;
+    }
 
     // if (userList.contains(userName)) {}
 
-    // add to arraylist
+    // add new instance of client, to the arrayList called clientList
+    Client newClient = new Client(userName, age);
+    // newClient.printDetails();
+    clientList.add(newClient);
+    // for (Client client : clientList) {
+    //   System.out.println(client);
+    //   System.out.println("print done");
+    // }
+
     // userList.add();
+    MessageCli.PROFILE_CREATED.printMessage(userName, age);
   }
 
   public void loadProfile(String userName) {
