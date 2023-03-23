@@ -26,8 +26,6 @@ public class InsuranceSystem {
     // print out the details of each client
     for (int i = 0; i < clientList.size(); i++) {
       Client someClientInstance = clientList.get(i);
-      // System.out.print(" " + (i + 1) + ": ");
-      // someClientInstance.printDetails();
       String position = Integer.toString(i + 1);
       MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
           position, someClientInstance.getUserName(), someClientInstance.getAge());
