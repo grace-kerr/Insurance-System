@@ -6,9 +6,11 @@ import nz.ac.auckland.se281.Main.PolicyType;
 public class InsuranceSystem {
 
   private ArrayList<Client> clientList = new ArrayList<>();
+  private boolean isProfileLoaded;
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
+    this.isProfileLoaded = false;
   }
 
   public void printDatabase() {
@@ -78,15 +80,40 @@ public class InsuranceSystem {
   }
 
   public void loadProfile(String userName) {
-    // TODO: Complete this method.
+    String firstLetter = userName.substring(0, 1).toUpperCase();
+    String allLettersButFirst = userName.substring(1).toLowerCase();
+    userName = firstLetter + allLettersButFirst;
+
+    MessageCli.PROFILE_LOADED.printMessage(userName);
+    MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
-  public void unloadProfile() {
-    // TODO: Complete this method.
-  }
+  public void unloadProfile() {}
 
   public void deleteProfile(String userName) {
-    // TODO: Complete this method.
+    String firstLetter = userName.substring(0, 1).toUpperCase();
+    String allLettersButFirst = userName.substring(1).toLowerCase();
+    userName = firstLetter + allLettersButFirst;
+
+    // check if a profile is loaded, otherwise return error message
+    if (isProfileLoaded) {
+      MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
+      return;
+    }
+
+    // itierate through the clientList, and remove the client with the matching username
+    for (int i = 0; i < clientList.size(); i++) {
+      Client tempClient = clientList.get(i);
+      String tempClientName = tempClient.getUserName();
+      if (tempClientName.contentEquals(userName)) {
+        clientList.remove(i);
+        MessageCli.PROFILE_DELETED.printMessage(userName);
+        return;
+      }
+    }
+
+    // if the username is not found in the database
+    MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
   }
 
   public void createPolicy(PolicyType type, String[] options) {
