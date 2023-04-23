@@ -46,4 +46,30 @@ public class Client {
   public Policy getPolicy(int index) {
     return policies.get(index);
   }
+
+  public int getPolicyDiscountedPremium(int basePremium) {
+    // calculate discountes if client has more than 1 policy
+    int policyDiscountedPremium;
+    if (getNumberOfPoliciesInteger() == 2) {
+      policyDiscountedPremium = (int) (basePremium * 0.9);
+    } else if (getNumberOfPoliciesInteger() > 2) {
+      policyDiscountedPremium = (int) (basePremium * 0.8);
+    } else {
+      policyDiscountedPremium = basePremium;
+    }
+    return policyDiscountedPremium;
+  }
+
+  public String getPolicyDiscountedPremiumString(int basePremium) {
+    return String.valueOf(getPolicyDiscountedPremium(basePremium));
+  }
+
+  // public int getTotalPolicyDiscountedPremium(int bas) {
+  //   int totalPolicyDiscountedPremium = 0;
+  //   for (int i = 0; i < policies.size(); i++) {
+  //     totalPolicyDiscountedPremium += policies.get(i).getDiscountedPremium();
+  //   }
+  //   return totalPolicyDiscountedPremium;
+  // }
+
 }

@@ -15,10 +15,18 @@ public abstract class Policy extends Object {
 
   public Policy(int sumToBeInsured) {
     this.sumToBeInsured = sumToBeInsured;
-    // this.policyType = PolicyType;
+    //this.policyType = PolicyType;
   }
 
-  //   public Policy.PolicyType getType() {
-  //     return this.policyType;
-  //   }
+  public int getSumToBeInsured() {
+    return this.sumToBeInsured;
+  }
+
+  public String getSumToBeInsuredString() {
+    return String.valueOf(this.sumToBeInsured);
+  }
+
+  // public Policy.PolicyType getType() {
+  //   return this.policyType;
+  // }
 }

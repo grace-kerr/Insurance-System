@@ -18,4 +18,12 @@ public class Home extends Policy {
       return (int) (sumToBeInsured * 0.01);
     }
   }
+
+  public String getBasePremiumString() {
+    return String.valueOf(getBasePremium());
+  }
+
+  public String getAddress() {
+    return address;
+  }
 }

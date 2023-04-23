@@ -7,6 +7,10 @@ public class Life extends Policy {
   }
 
   public int getBasePremium(int age) {
-    return ((1 + age / 100) * sumToBeInsured);
+    return (((1 + age / 100) / 100) * sumToBeInsured);
+  }
+
+  public String getBasePremiumString(int age) {
+    return String.valueOf(getBasePremium(age));
   }
 }

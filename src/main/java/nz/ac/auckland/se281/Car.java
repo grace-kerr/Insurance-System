@@ -10,7 +10,7 @@ public class Car extends Policy {
       int sumToBeInsured,
       String makeAndModel,
       String licensePlate,
-      boolean hadMechanicalBreakdown) {
+      boolean coverForMechanicalBreakdown) {
     super(sumToBeInsured);
     this.makeAndModel = makeAndModel;
     this.licensePlate = licensePlate;
@@ -22,19 +22,23 @@ public class Car extends Policy {
     if (age < 25) {
       basePremium = (int) (sumToBeInsured * 0.15);
     } else {
-      basePremium = (int) (sumToBeInsured * 0.01);
+      basePremium = (int) (sumToBeInsured * 0.1);
     }
 
-    if (coverForMechanicalBreakdown) {
-      basePremium += 80;
+    if (this.coverForMechanicalBreakdown) {
+      basePremium = basePremium + 80;
     }
 
     return basePremium;
   }
 
-  // public String getMakeAndModel() {
-  //   return this.makeAndModel;
-  // }
+  public String getBasePremiumString(int age) {
+    return String.valueOf(getBasePremium(age));
+  }
+
+  public String getMakeAndModel() {
+    return this.makeAndModel;
+  }
 
   // public String getLicensePlate() {
   //   return this.licensePlate;

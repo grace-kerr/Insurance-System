@@ -73,6 +73,34 @@ public class InsuranceSystem {
               "");
         }
       }
+
+      // print out the details of each policy, if the client has them
+      for (int j = 0; j < someClientInstance.getNumberOfPoliciesInteger(); j++) {
+        Policy somePolicyInstance = someClientInstance.getPolicy(j);
+        if (somePolicyInstance instanceof Home) {
+          Home home = (Home) somePolicyInstance;
+          MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+              home.getAddress(),
+              somePolicyInstance.getSumToBeInsuredString(),
+              home.getBasePremiumString(),
+              someClientInstance.getPolicyDiscountedPremiumString(home.getBasePremium()));
+        } else if (somePolicyInstance instanceof Car) {
+          Car car = (Car) somePolicyInstance;
+          MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+              car.getMakeAndModel(),
+              somePolicyInstance.getSumToBeInsuredString(),
+              car.getBasePremiumString(someClientInstance.getAgeInteger()),
+              someClientInstance.getPolicyDiscountedPremiumString(
+                  car.getBasePremium(someClientInstance.getAgeInteger())));
+        } else if (somePolicyInstance instanceof Life) {
+          Life life = (Life) somePolicyInstance;
+          MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+              somePolicyInstance.getSumToBeInsuredString(),
+              life.getBasePremiumString(someClientInstance.getAgeInteger()),
+              someClientInstance.getPolicyDiscountedPremiumString(
+                  life.getBasePremium(someClientInstance.getAgeInteger())));
+        }
+      }
     }
   }
 
@@ -213,13 +241,14 @@ public class InsuranceSystem {
         break;
       case CAR:
         // change the string into boolean for the third element of the options
-        boolean coverForMechanicalBreakdown = false;
-        if (options[2].toLowerCase().startsWith("y")) {
+        boolean coverForMechanicalBreakdown;
+        if (options[3].toLowerCase().startsWith("y")) {
           coverForMechanicalBreakdown = true;
-        } else if (options[2].toLowerCase().startsWith("n")) {
+          newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
+        } else if (options[3].toLowerCase().startsWith("n")) {
           coverForMechanicalBreakdown = false;
+          newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
         }
-        newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
         break;
       case LIFE:
         if (loadedClient.getAgeInteger() > 100) {
