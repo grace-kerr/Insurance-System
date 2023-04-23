@@ -33,11 +33,45 @@ public class InsuranceSystem {
       String position = Integer.toString(i + 1);
       // if the client is loaded, indicate that it is loaded
       if (loadedClient == someClientInstance) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
-            "*** ", position, someClientInstance.getUserName(), someClientInstance.getAge());
+        if (someClientInstance.getNumberOfPolicies().equals("1")) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+              "*** ",
+              position,
+              someClientInstance.getUserName(),
+              someClientInstance.getAge(),
+              someClientInstance.getNumberOfPolicies(),
+              "y",
+              "");
+        } else {
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+              "*** ",
+              position,
+              someClientInstance.getUserName(),
+              someClientInstance.getAge(),
+              someClientInstance.getNumberOfPolicies(),
+              "ies",
+              "");
+        }
       } else {
-        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-            position, someClientInstance.getUserName(), someClientInstance.getAge());
+        if (someClientInstance.getNumberOfPolicies().equals("1")) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+              "",
+              position,
+              someClientInstance.getUserName(),
+              someClientInstance.getAge(),
+              someClientInstance.getNumberOfPolicies(),
+              "y",
+              "");
+        } else {
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+              "",
+              position,
+              someClientInstance.getUserName(),
+              someClientInstance.getAge(),
+              someClientInstance.getNumberOfPolicies(),
+              "ies",
+              "");
+        }
       }
     }
   }

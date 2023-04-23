@@ -29,4 +29,8 @@ public class Client {
   public void addPolicy(Policy newPolicy) {
     this.policies.add(newPolicy);
   }
+
+  public String getNumberOfPolicies() {
+    return String.valueOf(policies.size());
+  }
 }
