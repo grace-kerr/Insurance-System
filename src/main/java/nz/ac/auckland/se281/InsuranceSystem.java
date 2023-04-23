@@ -54,7 +54,7 @@ public class InsuranceSystem {
       return;
     }
 
-    // if the client is loaded, indicate that it is loaded
+    // make sure there is no client loaded
     if (isProfileLoaded) {
       MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedClient.getUserName());
       return;
@@ -114,7 +114,18 @@ public class InsuranceSystem {
     MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
-  public void unloadProfile() {}
+  public void unloadProfile() {
+    // check if a profile is loaded, otherwise return error message
+    if (!isProfileLoaded) {
+      MessageCli.NO_PROFILE_LOADED.printMessage();
+      return;
+    }
+
+    // unload the profile
+    MessageCli.PROFILE_UNLOADED.printMessage(loadedClient.getUserName());
+    isProfileLoaded = false;
+    loadedClient = null;
+  }
 
   public void deleteProfile(String userName) {
     String firstLetter = userName.substring(0, 1).toUpperCase();
