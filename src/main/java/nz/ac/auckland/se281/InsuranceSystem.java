@@ -12,6 +12,7 @@ public class InsuranceSystem {
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
     this.isProfileLoaded = false;
+    this.loadedClient = null;
   }
 
   public void printDatabase() {
@@ -30,8 +31,14 @@ public class InsuranceSystem {
     for (int i = 0; i < clientList.size(); i++) {
       Client someClientInstance = clientList.get(i);
       String position = Integer.toString(i + 1);
-      MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-          position, someClientInstance.getUserName(), someClientInstance.getAge());
+      // if the client is loaded, indicate that it is loaded
+      if (loadedClient == someClientInstance) {
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+            "*** ", position, someClientInstance.getUserName(), someClientInstance.getAge());
+      } else {
+        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+            position, someClientInstance.getUserName(), someClientInstance.getAge());
+      }
     }
   }
 
@@ -44,6 +51,12 @@ public class InsuranceSystem {
     // make sure username is 3 letters or more
     if (userName.length() < 3) {
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
+      return;
+    }
+
+    // if the client is loaded, indicate that it is loaded
+    if (isProfileLoaded) {
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedClient.getUserName());
       return;
     }
 
@@ -91,6 +104,7 @@ public class InsuranceSystem {
       String tempClientName = tempClient.getUserName();
       if (tempClientName.contentEquals(userName)) {
         loadedClient = tempClient;
+        isProfileLoaded = true;
         MessageCli.PROFILE_LOADED.printMessage(userName);
         return;
       }
