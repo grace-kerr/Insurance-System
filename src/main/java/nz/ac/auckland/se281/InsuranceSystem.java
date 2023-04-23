@@ -222,8 +222,22 @@ public class InsuranceSystem {
         newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
         break;
       case LIFE:
+        if (loadedClient.getAgeInteger() > 100) {
+          MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedClient.getUserName());
+          return;
+        }
+        // if the client doesn't qualify for a (or another) life policy, return error message
+        if (loadedClient.getNumberOfPoliciesInteger() > 0) {
+          for (int i = 0; i < loadedClient.getNumberOfPoliciesInteger(); i++) {
+            Policy tempPolicy = loadedClient.getPolicy(i);
+            if (tempPolicy instanceof Life) {
+              MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedClient.getUserName());
+              return;
+            }
+          }
+        }
+
         newPolicy = new Life(sumToBeInsured);
-        break;
     }
 
     loadedClient.addPolicy(newPolicy);

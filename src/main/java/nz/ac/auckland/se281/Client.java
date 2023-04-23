@@ -26,11 +26,24 @@ public class Client {
     return this.age;
   }
 
+  public int getAgeInteger() {
+    int age = Integer.parseInt(this.age);
+    return age;
+  }
+
   public void addPolicy(Policy newPolicy) {
     this.policies.add(newPolicy);
   }
 
   public String getNumberOfPolicies() {
     return String.valueOf(policies.size());
+  }
+
+  public int getNumberOfPoliciesInteger() {
+    return policies.size();
+  }
+
+  public Policy getPolicy(int index) {
+    return policies.get(index);
   }
 }
