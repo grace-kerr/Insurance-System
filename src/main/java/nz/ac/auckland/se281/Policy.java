@@ -2,7 +2,8 @@ package nz.ac.auckland.se281;
 
 public abstract class Policy extends Object {
 
-  private int sumToBeInsured;
+  protected int sumToBeInsured;
+  private int basePremium;
 
   public enum PolicyType {
     HOME,

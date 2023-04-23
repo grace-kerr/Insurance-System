@@ -213,13 +213,13 @@ public class InsuranceSystem {
         break;
       case CAR:
         // change the string into boolean for the third element of the options
-        boolean hadMechanicalBreakdown = false;
+        boolean coverForMechanicalBreakdown = false;
         if (options[2].toLowerCase().startsWith("y")) {
-          hadMechanicalBreakdown = true;
+          coverForMechanicalBreakdown = true;
         } else if (options[2].toLowerCase().startsWith("n")) {
-          hadMechanicalBreakdown = false;
+          coverForMechanicalBreakdown = false;
         }
-        newPolicy = new Car(sumToBeInsured, options[1], options[2], hadMechanicalBreakdown);
+        newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
         break;
       case LIFE:
         newPolicy = new Life(sumToBeInsured);

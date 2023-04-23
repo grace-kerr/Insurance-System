@@ -10,4 +10,12 @@ public class Home extends Policy {
     this.address = address;
     this.isHomeRental = isHomeRental;
   }
+
+  public int getBasePremium() {
+    if (isHomeRental) {
+      return (int) (sumToBeInsured * 0.02);
+    } else {
+      return (int) (sumToBeInsured * 0.01);
+    }
+  }
 }
