@@ -7,6 +7,7 @@ public class InsuranceSystem {
 
   private ArrayList<Client> clientList = new ArrayList<>();
   private boolean isProfileLoaded;
+  private Client loadedClient;
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
@@ -84,7 +85,18 @@ public class InsuranceSystem {
     String allLettersButFirst = userName.substring(1).toLowerCase();
     userName = firstLetter + allLettersButFirst;
 
-    MessageCli.PROFILE_LOADED.printMessage(userName);
+    // if the username is in the database, load the profile
+    for (int i = 0; i < clientList.size(); i++) {
+      Client tempClient = clientList.get(i);
+      String tempClientName = tempClient.getUserName();
+      if (tempClientName.contentEquals(userName)) {
+        loadedClient = tempClient;
+        MessageCli.PROFILE_LOADED.printMessage(userName);
+        return;
+      }
+    }
+
+    // if the username is not found in the database
     MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
