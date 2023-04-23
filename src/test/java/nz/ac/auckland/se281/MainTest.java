@@ -186,14 +186,6 @@ public class MainTest {
     }
   }
 
-
-
-
-
-
-
-
-
   public static class Task3 extends CliTest {
     public Task3() {
       super(Main.class);
@@ -363,13 +355,6 @@ public class MainTest {
       assertContains("Car Policy (Subaru Impreza, Sum Insured: $55000, Premium: $8250 -> $8250)");
     }
   }
-
-
-
-
-
-
-  
 
   public static class YourTests extends CliTest {
     public YourTests() {

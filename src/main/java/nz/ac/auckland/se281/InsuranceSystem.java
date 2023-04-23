@@ -31,7 +31,29 @@ public class InsuranceSystem {
     for (int i = 0; i < clientList.size(); i++) {
       Client someClientInstance = clientList.get(i);
       String position = Integer.toString(i + 1);
-      // if the client is loaded, indicate that it is loaded
+
+      // calculate total client has to pay
+      int totalToPay = 0;
+      for (int k = 0; k < someClientInstance.getNumberOfPoliciesInteger(); k++) {
+        Policy somePolicyInstance = someClientInstance.getPolicy(k);
+        if (somePolicyInstance instanceof Home) {
+          Home home = (Home) somePolicyInstance;
+          totalToPay += someClientInstance.getPolicyDiscountedPremium(home.getBasePremium());
+        } else if (somePolicyInstance instanceof Car) {
+          Car car = (Car) somePolicyInstance;
+          totalToPay +=
+              someClientInstance.getPolicyDiscountedPremium(
+                  car.getBasePremium(someClientInstance.getAgeInteger()));
+        } else if (somePolicyInstance instanceof Life) {
+          Life life = (Life) somePolicyInstance;
+          totalToPay +=
+              someClientInstance.getPolicyDiscountedPremium(
+                  life.getBasePremium(someClientInstance.getAgeInteger()));
+        }
+      }
+      String totalToPayString = String.valueOf(totalToPay);
+
+      // indicate if client is loaded
       if (loadedClient == someClientInstance) {
         if (someClientInstance.getNumberOfPolicies().equals("1")) {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
@@ -41,7 +63,7 @@ public class InsuranceSystem {
               someClientInstance.getAge(),
               someClientInstance.getNumberOfPolicies(),
               "y",
-              "");
+              totalToPayString);
         } else {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
               "*** ",
@@ -50,7 +72,7 @@ public class InsuranceSystem {
               someClientInstance.getAge(),
               someClientInstance.getNumberOfPolicies(),
               "ies",
-              "");
+              totalToPayString);
         }
       } else {
         if (someClientInstance.getNumberOfPolicies().equals("1")) {
@@ -61,7 +83,7 @@ public class InsuranceSystem {
               someClientInstance.getAge(),
               someClientInstance.getNumberOfPolicies(),
               "y",
-              "");
+              totalToPayString);
         } else {
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
               "",
@@ -70,7 +92,7 @@ public class InsuranceSystem {
               someClientInstance.getAge(),
               someClientInstance.getNumberOfPolicies(),
               "ies",
-              "");
+              totalToPayString);
         }
       }
 
