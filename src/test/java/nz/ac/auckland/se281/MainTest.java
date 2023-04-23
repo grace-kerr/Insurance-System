@@ -13,7 +13,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   MainTest.Task1.class,
   MainTest.Task2.class, // Uncomment this line when to start Task 2
-  // MainTest.Task3.class, // Uncomment this line when to start Task 3
+  MainTest.Task3.class, // Uncomment this line when to start Task 3
   // MainTest.YourTests.class, // Uncomment this line to run your own tests
 })
 public class MainTest {
@@ -77,10 +77,6 @@ public class MainTest {
       assertDoesNotContain("TOM");
     }
   }
-
-
-
-  
 
   public static class Task2 extends CliTest {
     public Task2() {
@@ -189,6 +185,14 @@ public class MainTest {
       assertContains("3: Jenny, 23");
     }
   }
+
+
+
+
+
+
+
+
 
   public static class Task3 extends CliTest {
     public Task3() {
@@ -359,6 +363,13 @@ public class MainTest {
       assertContains("Car Policy (Subaru Impreza, Sum Insured: $55000, Premium: $8250 -> $8250)");
     }
   }
+
+
+
+
+
+
+  
 
   public static class YourTests extends CliTest {
     public YourTests() {

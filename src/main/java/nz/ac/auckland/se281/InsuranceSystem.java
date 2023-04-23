@@ -156,6 +156,12 @@ public class InsuranceSystem {
   }
 
   public void createPolicy(PolicyType type, String[] options) {
-    // TODO: Complete this method.
+    // if no profile is loaded, return error message
+    if (!isProfileLoaded) {
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+      return;
+    }
+
+    MessageCli.NEW_POLICY_CREATED.printMessage(type.name(), loadedClient.getUserName());
   }
 }
