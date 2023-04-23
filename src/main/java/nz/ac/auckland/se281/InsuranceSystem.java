@@ -43,6 +43,12 @@ public class InsuranceSystem {
   }
 
   public void createNewProfile(String userName, String age) {
+    // make sure there is no client loaded
+    if (isProfileLoaded) {
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedClient.getUserName());
+      return;
+    }
+
     // ensure that name inputted is in title case
     String firstLetter = userName.substring(0, 1).toUpperCase();
     String allLettersButFirst = userName.substring(1).toLowerCase();
@@ -51,12 +57,6 @@ public class InsuranceSystem {
     // make sure username is 3 letters or more
     if (userName.length() < 3) {
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
-      return;
-    }
-
-    // make sure there is no client loaded
-    if (isProfileLoaded) {
-      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedClient.getUserName());
       return;
     }
 
@@ -132,17 +132,19 @@ public class InsuranceSystem {
     String allLettersButFirst = userName.substring(1).toLowerCase();
     userName = firstLetter + allLettersButFirst;
 
-    // check if a profile is loaded, otherwise return error message
-    if (isProfileLoaded) {
-      MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
-      return;
-    }
-
     // itierate through the clientList, and remove the client with the matching username
     for (int i = 0; i < clientList.size(); i++) {
       Client tempClient = clientList.get(i);
       String tempClientName = tempClient.getUserName();
       if (tempClientName.contentEquals(userName)) {
+        // check if a profile is loaded, otherwise return error message
+        if (isProfileLoaded) {
+          if (tempClientName.contentEquals(loadedClient.getUserName())) {
+            MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
+            return;
+          }
+        }
+
         clientList.remove(i);
         MessageCli.PROFILE_DELETED.printMessage(userName);
         return;
