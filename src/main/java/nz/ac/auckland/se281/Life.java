@@ -7,7 +7,8 @@ public class Life extends Policy {
   }
 
   public int getBasePremium(int age) {
-    return (((1 + age / 100) / 100) * sumToBeInsured);
+    double percentage = ((1 + (double) age / 100) / 100);
+    return (int) (percentage * sumToBeInsured);
   }
 
   public String getBasePremiumString(int age) {
