@@ -162,6 +162,39 @@ public class InsuranceSystem {
       return;
     }
 
-    MessageCli.NEW_POLICY_CREATED.printMessage(type.name(), loadedClient.getUserName());
+    // change the first element of the options into an integer
+    int sumToBeInsured = Integer.parseInt(options[0]);
+
+    Policy newPolicy = null;
+    switch (type) {
+      case HOME:
+        // change the string into boolean for the third element of the options
+        boolean isHomeRental = false;
+        if (options[2].toLowerCase().startsWith("y")) {
+          isHomeRental = true;
+        } else if (options[2].toLowerCase().startsWith("n")) {
+          isHomeRental = false;
+        }
+        newPolicy = new Home(sumToBeInsured, options[1], isHomeRental);
+        break;
+      case CAR:
+        // change the string into boolean for the third element of the options
+        boolean hadMechanicalBreakdown = false;
+        if (options[2].toLowerCase().startsWith("y")) {
+          hadMechanicalBreakdown = true;
+        } else if (options[2].toLowerCase().startsWith("n")) {
+          hadMechanicalBreakdown = false;
+        }
+        newPolicy = new Car(sumToBeInsured, options[1], options[2], hadMechanicalBreakdown);
+        break;
+      case LIFE:
+        newPolicy = new Life(sumToBeInsured);
+        break;
+    }
+
+    loadedClient.addPolicy(newPolicy);
+
+    MessageCli.NEW_POLICY_CREATED.printMessage(
+        type.name().toLowerCase(), loadedClient.getUserName());
   }
 }
