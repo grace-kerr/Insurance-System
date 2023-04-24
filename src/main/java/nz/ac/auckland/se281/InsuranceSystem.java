@@ -41,14 +41,10 @@ public class InsuranceSystem {
           totalToPay += someClientInstance.getPolicyDiscountedPremium(home.getBasePremium());
         } else if (somePolicyInstance instanceof Car) {
           Car car = (Car) somePolicyInstance;
-          totalToPay +=
-              someClientInstance.getPolicyDiscountedPremium(
-                  car.getBasePremium(someClientInstance.getAgeInteger()));
+          totalToPay += someClientInstance.getPolicyDiscountedPremium(car.getBasePremium());
         } else if (somePolicyInstance instanceof Life) {
           Life life = (Life) somePolicyInstance;
-          totalToPay +=
-              someClientInstance.getPolicyDiscountedPremium(
-                  life.getBasePremium(someClientInstance.getAgeInteger()));
+          totalToPay += someClientInstance.getPolicyDiscountedPremium(life.getBasePremium());
         }
       }
       String totalToPayString = String.valueOf(totalToPay);
@@ -111,16 +107,14 @@ public class InsuranceSystem {
           MessageCli.PRINT_DB_CAR_POLICY.printMessage(
               car.getMakeAndModel(),
               somePolicyInstance.getSumToBeInsuredString(),
-              car.getBasePremiumString(someClientInstance.getAgeInteger()),
-              someClientInstance.getPolicyDiscountedPremiumString(
-                  car.getBasePremium(someClientInstance.getAgeInteger())));
+              car.getBasePremiumString(),
+              someClientInstance.getPolicyDiscountedPremiumString(car.getBasePremium()));
         } else if (somePolicyInstance instanceof Life) {
           Life life = (Life) somePolicyInstance;
           MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
               somePolicyInstance.getSumToBeInsuredString(),
-              life.getBasePremiumString(someClientInstance.getAgeInteger()),
-              someClientInstance.getPolicyDiscountedPremiumString(
-                  life.getBasePremium(someClientInstance.getAgeInteger())));
+              life.getBasePremiumString(),
+              someClientInstance.getPolicyDiscountedPremiumString(life.getBasePremium()));
         }
       }
     }
@@ -193,7 +187,6 @@ public class InsuranceSystem {
         return;
       }
     }
-
     // if the username is not found in the database
     MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
@@ -266,10 +259,20 @@ public class InsuranceSystem {
         boolean coverForMechanicalBreakdown;
         if (options[3].toLowerCase().startsWith("y")) {
           coverForMechanicalBreakdown = true;
-          newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
+          newPolicy =
+              new Car(
+                  sumToBeInsured,
+                  options[1],
+                  coverForMechanicalBreakdown,
+                  loadedClient.getAgeInteger());
         } else if (options[3].toLowerCase().startsWith("n")) {
           coverForMechanicalBreakdown = false;
-          newPolicy = new Car(sumToBeInsured, options[1], options[2], coverForMechanicalBreakdown);
+          newPolicy =
+              new Car(
+                  sumToBeInsured,
+                  options[1],
+                  coverForMechanicalBreakdown,
+                  loadedClient.getAgeInteger());
         }
         break;
       case LIFE:
@@ -288,7 +291,7 @@ public class InsuranceSystem {
           }
         }
 
-        newPolicy = new Life(sumToBeInsured);
+        newPolicy = new Life(sumToBeInsured, loadedClient.getAgeInteger());
     }
 
     loadedClient.addPolicy(newPolicy);

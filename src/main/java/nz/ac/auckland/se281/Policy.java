@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 public abstract class Policy extends Object {
 
   protected int sumToBeInsured;
-  private int basePremium;
+  protected int basePremium;
 
   public enum PolicyType {
     HOME,
@@ -11,11 +11,8 @@ public abstract class Policy extends Object {
     LIFE
   }
 
-  // protected PolicyType policyType;
-
   public Policy(int sumToBeInsured) {
     this.sumToBeInsured = sumToBeInsured;
-    //this.policyType = PolicyType;
   }
 
   public int getSumToBeInsured() {
@@ -26,7 +23,5 @@ public abstract class Policy extends Object {
     return String.valueOf(this.sumToBeInsured);
   }
 
-  // public Policy.PolicyType getType() {
-  //   return this.policyType;
-  // }
+  public abstract int getBasePremium();
 }

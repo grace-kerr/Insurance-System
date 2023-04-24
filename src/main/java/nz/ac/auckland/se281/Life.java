@@ -2,16 +2,20 @@ package nz.ac.auckland.se281;
 
 public class Life extends Policy {
 
-  public Life(int sumToBeInsured) {
+  private int age;
+
+  public Life(int sumToBeInsured, int age) {
     super(sumToBeInsured);
+    this.age = age;
   }
 
-  public int getBasePremium(int age) {
-    double percentage = ((1 + (double) age / 100) / 100);
+  @Override
+  public int getBasePremium() {
+    double percentage = ((1 + (double) this.age / 100) / 100);
     return (int) (percentage * sumToBeInsured);
   }
 
-  public String getBasePremiumString(int age) {
-    return String.valueOf(getBasePremium(age));
+  public String getBasePremiumString() {
+    return String.valueOf(getBasePremium());
   }
 }

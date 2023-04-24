@@ -64,12 +64,4 @@ public class Client {
     return String.valueOf(getPolicyDiscountedPremium(basePremium));
   }
 
-  // public int getTotalPolicyDiscountedPremium(int bas) {
-  //   int totalPolicyDiscountedPremium = 0;
-  //   for (int i = 0; i < policies.size(); i++) {
-  //     totalPolicyDiscountedPremium += policies.get(i).getDiscountedPremium();
-  //   }
-  //   return totalPolicyDiscountedPremium;
-  // }
-
 }

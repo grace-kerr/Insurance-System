@@ -11,6 +11,8 @@ public class Home extends Policy {
     this.isHomeRental = isHomeRental;
   }
 
+  // overrides the super class' getBasePremium
+  @Override
   public int getBasePremium() {
     if (isHomeRental) {
       return (int) (sumToBeInsured * 0.02);
